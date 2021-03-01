@@ -20,3 +20,7 @@
 * `$export FLASK_APP=main.py`
 * `$flask run`
 
+> Run Server in Debbug mode
+
+* `$export FLASK_DEBBUG=1`
+

@@ -24,3 +24,6 @@
 
 * `$export FLASK_DEBBUG=1`
 
+> Server in Development mode
+
+* `$export FLASK_ENV=development`

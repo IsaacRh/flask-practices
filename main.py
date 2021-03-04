@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response, redirect, render_template, session
+from flask import Flask, request, make_response, redirect, render_template, session, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField, PasswordField, SubmitField
@@ -35,15 +35,21 @@ def index():
     session['user_ip'] = user_ip
     return response
 
-@app.route('/hi')
+@app.route('/hi', methods=['GET', 'POST'])
 def hello():
     #user_ip = request.cookies.get('user_ip')
     login_form = LoginForm()
     user_ip = session.get('user_ip')
+    user_name = session.get('user_name')
     context = {
         'user_ip' : user_ip,
         'todos': todos,
         'login_form' : login_form,
+        'user_name' : user_name,
     }
+    if login_form.validate_on_submit():
+        user_name = login_form.user_name.data
+        session['user_name'] = user_name
+        return redirect(url_for('index'))
     # double asteric expand the context
     return render_template('hello.html', **context)

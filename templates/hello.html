@@ -7,6 +7,10 @@
 {% endblock %}
 
 {% block content %}
+
+    {% if user_name %}
+        <h1>Welcome {{ user_name | capitalize }}</h1>
+    {% endif %}
     {% if user_ip %}
 
         <h1>Hello world from flask your ip is {{ user_ip }}</h1>
